@@ -1,0 +1,30 @@
+package com.tecsup.gestion.services;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ContextHierarchy;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+
+import com.tecsup.gestion.model.Employee;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextHierarchy({ @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml"),
+		@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml") })
+@WebAppConfiguration
+public class EmployeeServiceTest {
+
+	@Autowired
+	private EmployeeService employeeService;
+
+	@Test
+	public void testFindEmployeeByLogin() {
+		Employee emp = employeeService.findEmployeeByLogin("jgomez");
+		Assert.assertEquals("Jaime", emp.getFirstname());
+
+	}
+}
